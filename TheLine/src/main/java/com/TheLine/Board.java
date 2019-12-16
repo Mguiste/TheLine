@@ -3,9 +3,8 @@ package main.java.com.TheLine;
 import main.java.com.TheLine.Shapes.*;
 
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.Stack;
 
 /**
  * Mutable
@@ -55,41 +54,40 @@ public class Board {
 
     // returns true if line created
     private boolean createLine(Point currentPoint, Stack<Point> pointsVisited) {
-        // the line has reached the bottom right corner
+        // the line has reached the bottom right corner, solution found
         if (currentPoint.y == board.length - 1 && currentPoint.x == board[0].length - 1) {
             board[currentPoint.y][currentPoint.x] = createSquare(pointsVisited.peek(), null);
             return true;
         }
 
-        List<Point> pointOptions = new ArrayList<>();
-        pointOptions.add(new Point(currentPoint.x , currentPoint.y + 1)); // right
-        pointOptions.add(new Point(currentPoint.x + 1, currentPoint.y)); // down
-        pointOptions.add(new Point(currentPoint.x, currentPoint.y - 1)); // left
-        pointOptions.add(new Point(currentPoint.x - 1, currentPoint.y)); // up
+        List<Point> pointOptions = new ArrayList<>(BoardUtil.getAllDirections(currentPoint));
 
         while (pointOptions.size() != 0) {
+            // selects random point from the options
             int index = (int) (Math.random() * pointOptions.size());
             Point nextPoint = pointOptions.get(index);
-            if (isPointValid(nextPoint, pointsVisited)) {
+
+            if (isPointOnBoard(nextPoint) && !pointsVisited.contains(nextPoint)) {
+                // saves the last point visited so create square know what shape to use
                 Point lastPoint = pointsVisited.empty() ? null : pointsVisited.peek();
                 pointsVisited.push(currentPoint);
+
                 if (createLine(nextPoint, pointsVisited)) {
+                    // found a solution mark board and return true
                     board[currentPoint.x][currentPoint.y] = createSquare(lastPoint, nextPoint);
                     return true;
                 }
+                // unable to find solution remove this point from visited list
                 pointsVisited.pop();
             }
+            // unable to find solution remove this point as an option
             pointOptions.remove(index);
         }
 
         return false;
     }
 
-    private boolean isPointValid(Point p, List<Point> pointsVisited) {
-        if (pointsVisited.contains(p)) {
-            return false;
-        }
-
+    private boolean isPointOnBoard(Point p) {
         if (0 <= p.y && p.y < board.length && 0 <= p.x && p.x < board[0].length) {
             return true;
         }
