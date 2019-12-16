@@ -9,6 +9,7 @@ import java.util.Stack;
 
 /**
  * Mutable
+ * Represents a board object in the game of creating a line from the top left to the bottom right.
  */
 public class Board {
     private Square[][] board;
@@ -23,20 +24,33 @@ public class Board {
         board = new Square[n][n]; // TODO: can shape class be static
 
         // creates a line in the board
-        createLine(new Point(), new Stack<>());
+        createLine(new Point(0, 0), new Stack<>());
 
         // create random shapes for the rest of the board
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
                 if (board[i][j] == null) {
-                    board[i][j] = new Square(ShapesUtility.getRandomShape());
+                    board[i][j] = new Square(ShapeUtil.getRandomShape());
                 }
             }
         }
     }
 
+    /**
+     * Rotates the square at row i and column j
+     *
+     * @param i the square row
+     * @param j the square column
+     */
     public void rotate(int i, int j) {
         board[i][j].rotate();
+    }
+
+    /**
+     * Returns true if a line can be made from the top left corner of the board to the bottom right.
+     */
+    public boolean solved() {
+        return false;
     }
 
     // returns true if line created
@@ -99,7 +113,14 @@ public class Board {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
+        sb.append("   ");
         for (int i = 0; i < board.length; i++) {
+            sb.append(" " + (i + 1) + " ");
+        }
+        sb.append("\n");
+
+        for (int i = 0; i < board.length; i++) {
+            sb.append(" " + (i + 1) + " ");
             for (int j = 0; j < board[i].length; j++) {
                 sb.append(board[i][j]);
             }

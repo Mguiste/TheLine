@@ -1,11 +1,13 @@
 package main.java.com.TheLine.Shapes;
 
+import main.java.com.TheLine.BoardUtil;
+
 public class Line implements Shape {
     private static final String[] ORIENTATIONS = {" - ", " | ", " - ", " | "};
 
     @Override
     public int[] sides(int orientation) {
-        return new int[] {orientation, (orientation + 2) % ShapesUtility.TOTAL_ORIENTATIONS};
+        return new int[] {orientation, (orientation + 2) % BoardUtil.TOTAL_DIRECTIONS};
     }
 
     @Override
