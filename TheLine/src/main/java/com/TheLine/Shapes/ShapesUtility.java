@@ -13,4 +13,8 @@ public class ShapesUtility {
         int shape = (int) (Math.random() * SHAPES.length);
         return SHAPES[shape];
     }
+
+    public static int getRandomOrientation() {
+        return (int) (Math.random() * TOTAL_ORIENTATIONS);
+    }
 }

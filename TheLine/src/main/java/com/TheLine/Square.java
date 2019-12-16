@@ -12,13 +12,21 @@ public class Square {
     private Shape shape;
 
     public Square(Shape shape) {
+        this(shape, ShapesUtility.getRandomOrientation());
+    }
+
+    public Square(Shape shape, int orientation) {
         this.shape = shape;
-        orientation = (int) (Math.random() * ShapesUtility.TOTAL_ORIENTATIONS);
+        this.orientation = orientation;
     }
 
     public void rotate() {
         orientation += 1;
         orientation %= ShapesUtility.TOTAL_ORIENTATIONS;
+    }
+
+    public void setOrientation(int orientation) {
+        this.orientation = orientation;
     }
 
     @Override

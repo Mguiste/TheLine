@@ -1,7 +1,6 @@
 package main.java.com.TheLine;
 
-import main.java.com.TheLine.Shapes.Circle;
-import main.java.com.TheLine.Shapes.Plus;
+import main.java.com.TheLine.Shapes.*;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -21,15 +20,19 @@ public class Board {
      */
     public Board(int n) {
         // initializes board
-        board = new Square[n][n];
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
-                board[i][j] = new Square(new Plus()); // TODO: can shape class be static
-            }
-        }
+        board = new Square[n][n]; // TODO: can shape class be static
 
         // creates a line in the board
         createLine(new Point(), new Stack<>());
+
+        // create random shapes for the rest of the board
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                if (board[i][j] == null) {
+                    board[i][j] = new Square(ShapesUtility.getRandomShape());
+                }
+            }
+        }
     }
 
     public void rotate(int i, int j) {
@@ -39,24 +42,25 @@ public class Board {
     // returns true if line created
     private boolean createLine(Point currentPoint, Stack<Point> pointsVisited) {
         // the line has reached the bottom right corner
-        if (currentPoint.x == board.length - 1 && currentPoint.y == board[0].length - 1) {
-            board[currentPoint.x][currentPoint.y] = new Square(new Circle());
+        if (currentPoint.y == board.length - 1 && currentPoint.x == board[0].length - 1) {
+            board[currentPoint.y][currentPoint.x] = createSquare(pointsVisited.peek(), null);
             return true;
         }
 
         List<Point> pointOptions = new ArrayList<>();
-        pointOptions.add(new Point(currentPoint.x + 1, currentPoint.y)); // right
-        pointOptions.add(new Point(currentPoint.x, currentPoint.y + 1)); // down
-        pointOptions.add(new Point(currentPoint.x - 1, currentPoint.y)); // left
-        pointOptions.add(new Point(currentPoint.x, currentPoint.y - 1)); // up
+        pointOptions.add(new Point(currentPoint.x , currentPoint.y + 1)); // right
+        pointOptions.add(new Point(currentPoint.x + 1, currentPoint.y)); // down
+        pointOptions.add(new Point(currentPoint.x, currentPoint.y - 1)); // left
+        pointOptions.add(new Point(currentPoint.x - 1, currentPoint.y)); // up
 
         while (pointOptions.size() != 0) {
             int index = (int) (Math.random() * pointOptions.size());
             Point nextPoint = pointOptions.get(index);
             if (isPointValid(nextPoint, pointsVisited)) {
+                Point lastPoint = pointsVisited.empty() ? null : pointsVisited.peek();
                 pointsVisited.push(currentPoint);
                 if (createLine(nextPoint, pointsVisited)) {
-                    board[currentPoint.x][currentPoint.y] = new Square(new Circle());
+                    board[currentPoint.x][currentPoint.y] = createSquare(lastPoint, nextPoint);
                     return true;
                 }
                 pointsVisited.pop();
@@ -72,11 +76,24 @@ public class Board {
             return false;
         }
 
-        if (0 <= p.x && p.x < board.length && 0 <= p.y && p.y < board[0].length) {
+        if (0 <= p.y && p.y < board.length && 0 <= p.x && p.x < board[0].length) {
             return true;
         }
 
         return false;
+    }
+
+    private Square createSquare(Point lastPoint, Point nextPoint) {
+        if (lastPoint == null || nextPoint == null) {
+            // first or last point
+            return new Square(new Arrow());
+        }
+
+        if (lastPoint.x == nextPoint.x || lastPoint.y == nextPoint.y) {
+            return new Square(new Line());
+        }
+
+        return new Square(new Corner());
     }
 
     @Override
