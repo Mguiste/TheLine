@@ -11,6 +11,9 @@ import java.util.List;
  * Represents a board object in the game of creating a line from the top left to the bottom right.
  */
 public class Board {
+    private static final Point START_POINT = new Point(0, 0);
+    private Point END_POINT;
+
     private Square[][] board;
 
     /**
@@ -19,11 +22,13 @@ public class Board {
      * @param n the number of squares in the width and length of the board
      */
     public Board(int n) {
+        END_POINT = new Point(n - 1, n - 1);
+
         // initializes board
         board = new Square[n][n]; // TODO: can shape class be static
 
         // creates a line in the board
-        createLine(new Point(0, 0), new Stack<>());
+        createLine(START_POINT, new Stack<>());
 
         // create random shapes for the rest of the board
         for (int i = 0; i < board.length; i++) {
@@ -49,13 +54,18 @@ public class Board {
      * Returns true if a line can be made from the top left corner of the board to the bottom right.
      */
     public boolean solved() {
+        return solved(START_POINT, new Stack<>());
+    }
+
+    // private recursive backtracking method for solved
+    private boolean solved(Point p, Stack<Point> pointsVisited) {
         return false;
     }
 
     // returns true if line created
     private boolean createLine(Point currentPoint, Stack<Point> pointsVisited) {
-        // the line has reached the bottom right corner, solution found
-        if (currentPoint.y == board.length - 1 && currentPoint.x == board[0].length - 1) {
+        // the line has reached the end point, a solution has been found
+        if (currentPoint.equals(END_POINT)) {
             board[currentPoint.y][currentPoint.x] = createSquare(pointsVisited.peek(), null);
             return true;
         }
@@ -91,7 +101,6 @@ public class Board {
         if (0 <= p.y && p.y < board.length && 0 <= p.x && p.x < board[0].length) {
             return true;
         }
-
         return false;
     }
 
