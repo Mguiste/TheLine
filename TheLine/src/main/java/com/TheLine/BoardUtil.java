@@ -1,8 +1,11 @@
 package main.java.com.TheLine;
 
 import java.awt.*;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class BoardUtil {
     public static final int TOTAL_DIRECTIONS = 4;
@@ -32,12 +35,16 @@ public class BoardUtil {
         }
     }
 
-    public static Set<Point> getAllDirections(Point p) {
+    public static Set<Point> getAdjacentPoints(Point p) {
         Set<Point> points = new HashSet<>();
         for (int i = 0; i < TOTAL_DIRECTIONS; i++) {
             points.add(translatePoint(p, i));
         }
         return points;
+    }
+
+    public static Set<Point> getDirectionPoints(Point p, int[] directions) {
+        return Arrays.stream(directions).mapToObj(d -> translatePoint(p, d)).collect(Collectors.toSet());
     }
 
     public static int getRandomDirection() {

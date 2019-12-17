@@ -1,5 +1,6 @@
 package main.java.com.TheLine;
 
+import com.google.common.base.Splitter;
 import main.java.com.TheLine.Shapes.*;
 
 import java.awt.*;
@@ -22,10 +23,11 @@ public class Board {
      * @param n the number of squares in the width and length of the board
      */
     public Board(int n) {
-        END_POINT = new Point(n - 1, n - 1);
-
         // initializes board
         board = new Square[n][n]; // TODO: can shape class be static
+
+        // sets the end point
+        END_POINT = new Point(n - 1, n - 1);
 
         // creates a line in the board
         createLine(START_POINT, new Stack<>());
@@ -38,6 +40,34 @@ public class Board {
                 }
             }
         }
+    }
+
+    /**
+     * Creates board based on a toString of a board
+     *
+     * @param str
+     */
+    public Board(String str) {
+        String[] lines = str.split("\n");
+        board = new Square[lines.length][];
+        for (int i = 0; i < lines.length; i++) {
+            List<String> squares = split(lines[i], 3);
+            board[i] = new Square[squares.size()];
+            for (int j = 0; j < squares.size(); j++) {
+                board[i][j] = ShapeUtil.parseSquare(squares.get(j));
+            }
+        }
+
+        // sets the end point
+        END_POINT = new Point(board[0].length - 1, board.length - 1);
+    }
+
+    private List<String> split(String str, int length) {
+        List<String> strings = new ArrayList<>();
+        for (int i = 0; i < str.length(); i += length) {
+            strings.add(str.substring(i, i + length));
+        }
+        return strings;
     }
 
     /**
@@ -58,8 +88,41 @@ public class Board {
     }
 
     // private recursive backtracking method for solved
-    private boolean solved(Point p, Stack<Point> pointsVisited) {
+    private boolean solved(Point currentPoint, Stack<Point> pointsVisited) {
+        if (currentPoint.equals(END_POINT)) {
+            // found a solution
+            return true;
+        }
+
+        // points that this point reaches
+        List<Point> nextPoints = getNextPointsFromPoint(currentPoint);
+
+        for (Point nextPoint : nextPoints) {
+
+            // checks if next point is on the board and unvisited
+            if (isPointOnBoard(nextPoint) && !pointsVisited.contains(nextPoint)) {
+
+                // used to double check next point also reaches current point
+                List<Point> nextNextPoints = getNextPointsFromPoint(nextPoint);
+                if (nextNextPoints.contains(currentPoint)) {
+                    pointsVisited.push(currentPoint);
+
+                    // continues to next solve point
+                    if (solved(nextPoint, pointsVisited)) {
+                        return true;
+                    }
+                    pointsVisited.pop();
+                }
+            }
+        }
+
         return false;
+    }
+
+    private List<Point> getNextPointsFromPoint(Point p) {
+        Square currentSquare = board[p.y][p.x];
+        int[] directions = currentSquare.sidesReached();
+        return new ArrayList<>(BoardUtil.getDirectionPoints(p, directions));
     }
 
     // returns true if line created
@@ -70,7 +133,7 @@ public class Board {
             return true;
         }
 
-        List<Point> pointOptions = new ArrayList<>(BoardUtil.getAllDirections(currentPoint));
+        List<Point> pointOptions = new ArrayList<>(BoardUtil.getAdjacentPoints(currentPoint));
 
         while (pointOptions.size() != 0) {
             // selects random point from the options

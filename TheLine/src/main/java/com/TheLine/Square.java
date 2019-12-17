@@ -1,22 +1,22 @@
 package main.java.com.TheLine;
 
 import main.java.com.TheLine.Shapes.Shape;
-import main.java.com.TheLine.Shapes.ShapeUtil;
-
-import java.awt.*;
-import java.util.List;
 
 /**
  * Mutable
  */
 public class Square {
 
-    private int orientation;
     private Shape shape;
+    private int orientation;
 
     public Square(Shape shape) {
-        orientation = BoardUtil.getRandomDirection();
+        this(shape, 0);
+    }
+
+    public Square(Shape shape, int orientation) {
         this.shape = shape;
+        this.orientation = orientation;
     }
 
     public void rotate() {
@@ -24,12 +24,9 @@ public class Square {
         orientation %= BoardUtil.TOTAL_DIRECTIONS;
     }
 
-//    public List<Point> pointsReached(Point currentPoint) {
-//        int[] sides = shape.sides(orientation);
-//        for (int side : sides) {
-//
-//        }
-//    }
+    public int[] sidesReached() {
+       return shape.sidesReached(orientation);
+    }
 
     @Override
     public String toString() {

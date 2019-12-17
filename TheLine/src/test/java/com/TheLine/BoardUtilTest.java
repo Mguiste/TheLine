@@ -2,6 +2,7 @@ package test.java.com.TheLine;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import main.java.com.TheLine.Board;
 import main.java.com.TheLine.BoardUtil;
 import org.junit.jupiter.api.Test;
 
@@ -18,14 +19,24 @@ public final class BoardUtilTest {
     }
 
     @Test
-    public void getPointsInAllDirectionsTest() {
+    public void getAdjacentPointsTest() {
         Point p = new Point(0, 0);
-        Set<Point> result = BoardUtil.getAllDirections(p);
+        Set<Point> result = BoardUtil.getAdjacentPoints(p);
         Set<Point> expected = new HashSet<>();
         expected.add(new Point(1, 0));
         expected.add(new Point(0, 1));
         expected.add(new Point(-1, 0));
         expected.add(new Point(0, -1));
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void getDirectionPoints() {
+        Point p = new Point(0, 0);
+        Set<Point> result = BoardUtil.getDirectionPoints(p, new int[] {BoardUtil.RIGHT, BoardUtil.LEFT});
+        Set<Point> expected = new HashSet<>();
+        expected.add(new Point(1, 0));
+        expected.add(new Point(-1, 0));
         assertEquals(expected, result);
     }
 }

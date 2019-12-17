@@ -1,10 +1,24 @@
 package main.java.com.TheLine;
 
+import java.util.Base64;
 import java.util.Scanner;
 
 public class TheLine {
+    public static final int BOARD_SIZE = 8;
+
     public static void main(String[] args) {
-        Board board = new Board(5);
+//        Board board = new Board(" ›  -  -  - ¨| \n" +
+//                " +  ‹  -  |¨_| \n" +
+//                " ‹  * ¨|  |  + \n" +
+//                " *  -  ˘  |_¨| \n" +
+//                " ˘  ‹  |¨ *  ^ ");
+        Board board = new Board(BOARD_SIZE);
+
+        // makes sure board isn't solved to start
+        while (board.solved()) {
+            board = new Board(BOARD_SIZE);
+        }
+
         System.out.println(board);
         Scanner input = new Scanner(System.in);
         int x = 0;
