@@ -4,7 +4,7 @@ public class Arrow implements Shape {
     private static final String[] ORIENTATIONS = {" › ", " ˘ ", " ‹ ", " ^ "};
 
     @Override
-    public int[] sides(int orientation) {
+    public int[] sidesReached(int orientation) {
         return new int[] {orientation};
     }
 

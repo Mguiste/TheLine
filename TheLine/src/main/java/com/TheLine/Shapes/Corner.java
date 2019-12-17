@@ -6,7 +6,7 @@ public class Corner implements Shape {
     private static final String[] ORIENTATIONS = {" |¨", "¨| ", "_| ", " |_"};
 
     @Override
-    public int[] sides(int orientation) {
+    public int[] sidesReached(int orientation) {
         return new int[] {orientation, (orientation + 1) % BoardUtil.TOTAL_DIRECTIONS};
     }
 

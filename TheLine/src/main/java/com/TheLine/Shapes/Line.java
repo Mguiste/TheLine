@@ -6,7 +6,7 @@ public class Line implements Shape {
     private static final String[] ORIENTATIONS = {" - ", " | ", " - ", " | "};
 
     @Override
-    public int[] sides(int orientation) {
+    public int[] sidesReached(int orientation) {
         return new int[] {orientation, (orientation + 2) % BoardUtil.TOTAL_DIRECTIONS};
     }
 
