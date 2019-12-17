@@ -2,7 +2,6 @@ package test.java.com.TheLine;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import main.java.com.TheLine.Board;
 import main.java.com.TheLine.BoardUtil;
 import org.junit.jupiter.api.Test;
 
