@@ -1,2 +1,7 @@
 Save game
 Add a gui, javascript and spark
+Show solution when solved
+Not square board
+Blocks between specific edges to make harder to solve
+Make random selection of other edges less random
+Different shapes like the T
