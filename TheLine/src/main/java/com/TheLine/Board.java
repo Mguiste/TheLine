@@ -13,7 +13,6 @@ import java.util.List;
  */
 public class Board {
     private static final Point START_POINT = new Point(0, 0);
-    private Point END_POINT;
 
     private Square[][] board;
 
@@ -25,9 +24,6 @@ public class Board {
     public Board(int n) {
         // initializes board
         board = new Square[n][n]; // TODO: can shape class be static
-
-        // sets the end point
-        END_POINT = new Point(n - 1, n - 1);
 
         // creates a line in the board
         createLine(START_POINT, new Stack<>());
@@ -57,9 +53,6 @@ public class Board {
                 board[i][j] = ShapeUtil.parseSquare(squares.get(j));
             }
         }
-
-        // sets the end point
-        END_POINT = new Point(board[0].length - 1, board.length - 1);
     }
 
     private List<String> split(String str, int length) {
@@ -89,7 +82,7 @@ public class Board {
 
     // private recursive backtracking method for solved
     private boolean solved(Point currentPoint, Stack<Point> pointsVisited) {
-        if (currentPoint.equals(END_POINT)) {
+        if (currentPoint.equals(getEndPoint())) {
             // found a solution
             return true;
         }
@@ -125,23 +118,30 @@ public class Board {
         return new ArrayList<>(BoardUtil.getDirectionPoints(p, directions));
     }
 
-    // returns true if line created
+    /**
+     * Will create a line from current point to the end point in getEndPoint. If successful returns true o.w. returns
+     * false;
+     *
+     * @param currentPoint the point the line is starting from
+     * @param pointsVisited a stack of all points already in the line if any
+     */
     private boolean createLine(Point currentPoint, Stack<Point> pointsVisited) {
         // the line has reached the end point, a solution has been found
-        if (currentPoint.equals(END_POINT)) {
+        if (currentPoint.equals(getEndPoint())) {
             board[currentPoint.y][currentPoint.x] = createSquare(pointsVisited.peek(), null);
             return true;
         }
 
+        // gets all adjacent points
         List<Point> pointOptions = new ArrayList<>(BoardUtil.getAdjacentPoints(currentPoint));
 
         while (pointOptions.size() != 0) {
-            // selects random point from the options
+            // selects a random adjacent points
             int index = (int) (Math.random() * pointOptions.size());
             Point nextPoint = pointOptions.get(index);
 
             if (isPointOnBoard(nextPoint) && !pointsVisited.contains(nextPoint)) {
-                // saves the last point visited so create square know what shape to use
+                // saves the last point visited so create square knows what shape to use
                 Point lastPoint = pointsVisited.empty() ? null : pointsVisited.peek();
                 pointsVisited.push(currentPoint);
 
@@ -178,6 +178,10 @@ public class Board {
         }
 
         return new Square(new Corner());
+    }
+
+    private Point getEndPoint() {
+        return new Point(board[0].length - 1, board.length - 1);
     }
 
     @Override
