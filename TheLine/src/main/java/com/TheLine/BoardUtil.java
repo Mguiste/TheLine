@@ -5,15 +5,8 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class BoardUtil {
-    public static final int TOTAL_DIRECTIONS = 4;
-    public static final int RIGHT = 0;
-    public static final int DOWN = 1;
-    public static final int LEFT = 2;
-    public static final int UP = 3;
-
     /**
      * Returns a new point translated in the direction specified.
      *
@@ -21,14 +14,14 @@ public class BoardUtil {
      * @param direction the direction to be translated
      * @return the new translated point
      */
-    public static Point translatePoint(Point p, int direction) {
-        if (direction == RIGHT) {
+    public static Point translatePoint(Point p, Direction direction) {
+        if (direction == Direction.RIGHT) {
             return new Point(p.x + 1, p.y);
-        } else if (direction == DOWN) {
+        } else if (direction == Direction.DOWN) {
             return new Point(p.x, p.y + 1);
-        } else if (direction == LEFT) {
+        } else if (direction == Direction.LEFT) {
             return new Point(p.x - 1, p.y);
-        } else if (direction == UP) {
+        } else if (direction == Direction.UP) {
             return new Point(p.x, p.y - 1);
         } else {
             throw new IllegalArgumentException("Invalid direction " + direction);
@@ -37,17 +30,17 @@ public class BoardUtil {
 
     public static Set<Point> getAdjacentPoints(Point p) {
         Set<Point> points = new HashSet<>();
-        for (int i = 0; i < TOTAL_DIRECTIONS; i++) {
-            points.add(translatePoint(p, i));
+        for (int i = 0; i < Direction.values().length; i++) {
+            points.add(translatePoint(p, Direction.values()[i]));
         }
         return points;
     }
 
-    public static Set<Point> getDirectionPoints(Point p, int[] directions) {
-        return Arrays.stream(directions).mapToObj(d -> translatePoint(p, d)).collect(Collectors.toSet());
+    public static Set<Point> getDirectionPoints(Point p, Direction[] directions) { // TODO: why map to obj before
+        return Arrays.stream(directions).map(d -> translatePoint(p, d)).collect(Collectors.toSet());
     }
 
     public static int getRandomDirection() {
-        return (int) (Math.random() * TOTAL_DIRECTIONS);
+        return (int) (Math.random() * Direction.values().length);
     }
 }

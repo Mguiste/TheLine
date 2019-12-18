@@ -1,6 +1,7 @@
 package main.java.com.TheLine;
 
 import main.java.com.TheLine.Shapes.Shape;
+import main.java.com.TheLine.Shapes.ShapeUtil;
 
 /**
  * Mutable
@@ -8,39 +9,38 @@ import main.java.com.TheLine.Shapes.Shape;
 public class Square {
 
     private Shape shape;
-    private int orientation;
+    private Direction direction;
 
     /**
-     * Create a square with the given shape and orientation of 0
+     * Create a square with the given shape and a random direction
      *
      * @param shape the shape of the square
      */
     public Square(Shape shape) {
-        this(shape, 0);
+        this(shape, Direction.values()[(int) (Math.random() * Direction.values().length)]);
     }
 
     /**
-     * Create a square with the given shape and orientation
+     * Create a square with the given shape and direction
      *
      * @param shape the shape of the square
-     * @param orientation the orientation of the square should be consistent with BoardUtil directions
+     * @param direction the direction the shape is facing
      */
-    public Square(Shape shape, int orientation) {
+    public Square(Shape shape, Direction direction) {
         this.shape = shape;
-        this.orientation = orientation;
+        this.direction = direction;
     }
 
     public void rotate() {
-        orientation += 1;
-        orientation %= BoardUtil.TOTAL_DIRECTIONS;
+        direction = Direction.values()[((ShapeUtil.directionToInt(direction) + 1) % Direction.values().length)];
     }
 
-    public int[] sidesReached() {
-       return shape.sidesReached(orientation);
+    public Direction[] directionsReached() {
+       return shape.directionsReached(direction);
     }
 
     @Override
     public String toString() {
-        return shape.toString(orientation);
+        return shape.toString(direction);
     }
 }

@@ -1,6 +1,5 @@
 package main.java.com.TheLine;
 
-import com.google.common.base.Splitter;
 import main.java.com.TheLine.Shapes.*;
 
 import java.awt.*;
@@ -114,7 +113,7 @@ public class Board {
 
     private List<Point> getNextPointsFromPoint(Point p) {
         Square currentSquare = board[p.y][p.x];
-        int[] directions = currentSquare.sidesReached();
+        Direction[] directions = currentSquare.directionsReached();
         return new ArrayList<>(BoardUtil.getDirectionPoints(p, directions));
     }
 
@@ -170,14 +169,14 @@ public class Board {
     private Square createSquare(Point lastPoint, Point nextPoint) {
         if (lastPoint == null || nextPoint == null) {
             // first or last point
-            return new Square(new Arrow());
+            return new Square(ShapeUtil.ARROW);
         }
 
         if (lastPoint.x == nextPoint.x || lastPoint.y == nextPoint.y) {
-            return new Square(new Line());
+            return new Square(ShapeUtil.LINE);
         }
 
-        return new Square(new Corner());
+        return new Square(ShapeUtil.CORNER);
     }
 
     private Point getEndPoint() {
