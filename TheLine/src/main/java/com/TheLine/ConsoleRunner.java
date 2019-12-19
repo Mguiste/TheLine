@@ -11,15 +11,14 @@ public class ConsoleRunner {
         System.out.print("What size of board (int)? ");
         int size = INPUT.nextInt();
         Board board = createBoard(size);
-        System.out.println("Here you god! Good Luck!");
+        System.out.println("Here you go! Good Luck!");
         System.out.println(board);
 
-        int moveCount = 1;
-        Point p; // TODO: allow quick reuse of last point
+        int moveCount = 1; // TODO: allow quick reuse of last point
         while(!board.solved()) {
             System.out.println("MOVE " + moveCount);
             System.out.println("Which square would you like to rotate?");
-            p = getPointFromUser(size);
+            Point p = getPointFromUser(size);
             board.rotate(p.y, p.x);
             System.out.println("\n" + board);
             moveCount++;

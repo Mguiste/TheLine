@@ -20,7 +20,7 @@ public class Board {
      *
      * @param n the number of squares in the width and length of the board
      */
-    public Board(int n) {
+    public Board(int n) { // TODO: board reattempt to created board if slow
         // initializes board
         board = new Square[n][n]; // TODO: can shape class be static
 
