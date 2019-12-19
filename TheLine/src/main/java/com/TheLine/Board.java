@@ -31,10 +31,13 @@ public class Board {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
                 if (board[i][j] == null) {
-                    board[i][j] = new Square(ShapeUtil.getRandomShape());
+                    board[i][j] = new Square(ShapeUtil.getRandomShape(), Direction.RIGHT);
                 }
             }
         }
+
+        // mixes up the board
+        shuffle();
     }
 
     /**
@@ -169,18 +172,26 @@ public class Board {
     private Square createSquare(Point lastPoint, Point nextPoint) {
         if (lastPoint == null || nextPoint == null) {
             // first or last point
-            return new Square(ShapeUtil.ARROW);
+            return new Square(ShapeUtil.ARROW, Direction.RIGHT);
         }
 
         if (lastPoint.x == nextPoint.x || lastPoint.y == nextPoint.y) {
-            return new Square(ShapeUtil.LINE);
+            return new Square(ShapeUtil.LINE, Direction.RIGHT);
         }
 
-        return new Square(ShapeUtil.CORNER);
+        return new Square(ShapeUtil.CORNER, Direction.RIGHT);
     }
 
     private Point getEndPoint() {
         return new Point(board[0].length - 1, board.length - 1);
+    }
+
+    private void shuffle() {
+        for (Square[] squares : board) {
+            for (Square square : squares) {
+                square.shuffle();
+            }
+        }
     }
 
     @Override

@@ -6,19 +6,10 @@ import main.java.com.TheLine.Shapes.ShapeUtil;
 /**
  * Mutable
  */
-public class Square {
+public class Square extends Object {
 
     private Shape shape;
     private Direction direction;
-
-    /**
-     * Create a square with the given shape and a random direction
-     *
-     * @param shape the shape of the square
-     */
-    public Square(Shape shape) {
-        this(shape, Direction.values()[(int) (Math.random() * Direction.values().length)]);
-    }
 
     /**
      * Create a square with the given shape and direction
@@ -39,8 +30,25 @@ public class Square {
        return shape.directionsReached(direction);
     }
 
+    /**
+     * Picks a random direction for the square
+     */
+    public void shuffle() {
+        direction = ShapeUtil.getRandomDirection();
+    }
+
     @Override
     public String toString() {
         return shape.toString(direction);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Square)) {
+            return false;
+        }
+
+        Square square = (Square) obj;
+        return shape.equals(square.shape) && direction == square.direction;
     }
 }

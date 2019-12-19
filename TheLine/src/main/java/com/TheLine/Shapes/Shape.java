@@ -32,4 +32,14 @@ public class Shape {
     public String toString(Direction direction) {
         return stringFunction.apply(direction);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Shape)) {
+            return false;
+        }
+
+        Shape shape = (Shape) obj;
+        return stringFunction.equals(shape.stringFunction) && directionFunction.equals(shape.directionFunction);
+    }
 }

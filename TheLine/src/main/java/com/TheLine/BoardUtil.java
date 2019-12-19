@@ -39,8 +39,4 @@ public class BoardUtil {
     public static Set<Point> getDirectionPoints(Point p, Direction[] directions) { // TODO: why map to obj before
         return Arrays.stream(directions).map(d -> translatePoint(p, d)).collect(Collectors.toSet());
     }
-
-    public static int getRandomDirection() {
-        return (int) (Math.random() * Direction.values().length);
-    }
 }

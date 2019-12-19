@@ -43,7 +43,7 @@ public class ShapeUtil {
             d -> Direction.values();
     public static final Shape PLUS = new Shape(PLUS_STRING_FUNCTION, PLUS_DIRECTION_FUNCTION);
 
-    private static final Shape[] SHAPES = {ARROW, CIRCLE, CORNER, LINE, PLUS};
+    public static final Shape[] SHAPES = {ARROW, CIRCLE, CORNER, LINE, PLUS};
 
     /**
      * Returns a random shape
@@ -68,7 +68,7 @@ public class ShapeUtil {
         } else if (str.equals(" ^ ")) {
             return new Square(ARROW, Direction.UP);
         } else if (str.equals(" * ")) {
-            return new Square(CIRCLE);
+            return new Square(CIRCLE, Direction.RIGHT);
         } else if (str.equals(" |¨")) {
             return new Square(CORNER, Direction.RIGHT);
         } else if (str.equals("¨| ")) {
@@ -82,12 +82,21 @@ public class ShapeUtil {
         } else if (str.equals(" | ")) {
             return new Square(LINE, Direction.DOWN);
         } else if (str.equals(" + ")) {
-            return new Square(PLUS);
+            return new Square(PLUS, Direction.RIGHT);
         } else {
             return null;
         }
     }
 
+    /**
+     * Converts the direction d into specific ints
+     *  RIGHT -> 0
+     *  DOWN -> 1
+     *  LEFT -> 2
+     *  UP -> 2
+     *
+     * @param d the direction to be converted
+     */
     public static int directionToInt(Direction d) {
         if (d == Direction.RIGHT) {
             return 0;
@@ -100,5 +109,13 @@ public class ShapeUtil {
         } else {
             throw new IllegalArgumentException("Unrecognized direction " + d);
         }
+    }
+
+    /**
+     * Returns a random Direction
+     */
+    public static Direction getRandomDirection() {
+        Direction[] directions = Direction.values();
+        return directions[(int) (Math.random() * directions.length)];
     }
 }
