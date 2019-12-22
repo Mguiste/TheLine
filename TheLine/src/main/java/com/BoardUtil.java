@@ -1,4 +1,4 @@
-package com.TheLine;
+package com;
 
 import java.awt.*;
 import java.util.Arrays;

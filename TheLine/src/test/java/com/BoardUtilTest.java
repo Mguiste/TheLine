@@ -1,8 +1,9 @@
-package com.TheLine;
+package com;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.TheLine.Direction;
+import com.Direction;
+import com.*;
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;

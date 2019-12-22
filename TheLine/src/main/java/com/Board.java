@@ -1,6 +1,6 @@
-package com.TheLine;
+package com;
 
-import com.TheLine.Shapes.*;
+import com.Shapes.*;
 
 import java.awt.*;
 import java.util.*;

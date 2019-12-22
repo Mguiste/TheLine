@@ -1,6 +1,6 @@
-package com.TheLine.Shapes;
+package com.Shapes;
 
-import com.TheLine.Direction;
+import com.Direction;
 
 import java.util.function.Function;
 

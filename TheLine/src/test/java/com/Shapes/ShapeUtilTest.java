@@ -1,10 +1,10 @@
-package com.TheLine;
+package com.Shapes;
 
-import com.TheLine.Shapes.ShapeUtil;
+import com.Shapes.ShapeUtil;
+import com.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ShapeUtilTest {

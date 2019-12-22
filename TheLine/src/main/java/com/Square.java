@@ -1,7 +1,7 @@
-package com.TheLine;
+package com;
 
-import com.TheLine.Shapes.Shape;
-import com.TheLine.Shapes.ShapeUtil;
+import com.Shapes.Shape;
+import com.Shapes.ShapeUtil;
 
 /**
  * Mutable

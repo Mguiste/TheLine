@@ -1,6 +1,6 @@
-package com.TheLine.Runners;
+package com.Runners;
 
-import com.TheLine.Board;
+import com.Board;
 
 import java.awt.*;
 import java.util.Scanner;
@@ -9,7 +9,7 @@ public class ConsoleRunner {
     private static final Scanner INPUT = new Scanner(System.in);
 
     public static void run() {
-        System.out.println("Welcome to TheLine game!");
+        System.out.println("Welcome to com.TheLine game!");
         System.out.print("What size of board (int)? ");
         int size = INPUT.nextInt();
         Board board = createBoard(size);

@@ -1,7 +1,7 @@
-package com.TheLine.Shapes;
+package com.Shapes;
 
-import com.TheLine.Direction;
-import com.TheLine.Square;
+import com.Direction;
+import com.Square;
 
 import java.util.function.Function;
 
@@ -53,7 +53,7 @@ public class ShapeUtil {
     }
 
     /**
-     * Takes in a string and returns the proper Square object
+     * Takes in a string and returns the proper com.Square object
      *
      * @param str the string square
      */
@@ -111,7 +111,7 @@ public class ShapeUtil {
     }
 
     /**
-     * Returns a random Direction
+     * Returns a random com.Direction
      */
     public static Direction getRandomDirection() {
         Direction[] directions = Direction.values();

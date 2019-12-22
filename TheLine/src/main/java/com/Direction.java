@@ -1,4 +1,4 @@
-package com.TheLine;
+package com;
 
 public enum Direction {
     RIGHT,
