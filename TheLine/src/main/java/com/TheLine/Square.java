@@ -1,7 +1,7 @@
-package main.java.com.TheLine;
+package com.TheLine;
 
-import main.java.com.TheLine.Shapes.Shape;
-import main.java.com.TheLine.Shapes.ShapeUtil;
+import com.TheLine.Shapes.Shape;
+import com.TheLine.Shapes.ShapeUtil;
 
 /**
  * Mutable

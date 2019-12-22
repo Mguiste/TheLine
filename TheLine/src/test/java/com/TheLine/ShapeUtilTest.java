@@ -1,8 +1,6 @@
-package test.java.com.TheLine;
+package com.TheLine;
 
-import main.java.com.TheLine.Direction;
-import main.java.com.TheLine.Shapes.ShapeUtil;
-import main.java.com.TheLine.Square;
+import com.TheLine.Shapes.ShapeUtil;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

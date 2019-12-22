@@ -1,7 +1,7 @@
-package main.java.com.TheLine.Runners;
+package com.TheLine.Runners;
 
 import com.google.gson.Gson;
-import main.java.com.TheLine.Board;
+import com.TheLine.Board;
 import spark.Spark;
 
 public class WebsiteRunner {

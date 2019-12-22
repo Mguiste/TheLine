@@ -1,9 +1,9 @@
-package test.java.com.TheLine;
+package com.TheLine;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import main.java.com.TheLine.Board;
+import com.TheLine.Board;
 import org.junit.jupiter.api.Test;
 
 public class BoardTest {

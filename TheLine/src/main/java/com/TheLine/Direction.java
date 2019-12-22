@@ -1,4 +1,4 @@
-package main.java.com.TheLine;
+package com.TheLine;
 
 public enum Direction {
     RIGHT,

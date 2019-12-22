@@ -1,4 +1,4 @@
-package main.java.com.TheLine;
+package com.TheLine;
 
 import java.awt.*;
 import java.util.Arrays;

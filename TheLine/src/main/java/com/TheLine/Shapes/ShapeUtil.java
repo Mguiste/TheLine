@@ -1,8 +1,7 @@
-package main.java.com.TheLine.Shapes;
+package com.TheLine.Shapes;
 
-import main.java.com.TheLine.BoardUtil;
-import main.java.com.TheLine.Direction;
-import main.java.com.TheLine.Square;
+import com.TheLine.Direction;
+import com.TheLine.Square;
 
 import java.util.function.Function;
 
