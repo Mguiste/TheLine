@@ -1,7 +1,7 @@
 package com;
 
-import com.Shapes.Shape;
-import com.Shapes.ShapeUtil;
+import com.shapes.Shape;
+import com.shapes.ShapeUtil;
 
 /**
  * Mutable

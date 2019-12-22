@@ -1,6 +1,6 @@
 package com;
 
-import com.Shapes.*;
+import com.shapes.*;
 
 import java.awt.*;
 import java.util.*;

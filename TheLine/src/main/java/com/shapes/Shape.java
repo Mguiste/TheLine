@@ -1,4 +1,4 @@
-package com.Shapes;
+package com.shapes;
 
 import com.Direction;
 

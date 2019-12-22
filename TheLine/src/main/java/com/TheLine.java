@@ -1,6 +1,6 @@
 package com;
 
-import com.Runners.ConsoleRunner;
+import com.runners.ConsoleRunner;
 
 public class TheLine {
     public static void main(String[] args) {

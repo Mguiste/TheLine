@@ -1,6 +1,5 @@
-package com.Shapes;
+package com.shapes;
 
-import com.Shapes.ShapeUtil;
 import com.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

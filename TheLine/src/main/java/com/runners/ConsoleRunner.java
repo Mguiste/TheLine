@@ -1,4 +1,4 @@
-package com.Runners;
+package com.runners;
 
 import com.Board;
 
