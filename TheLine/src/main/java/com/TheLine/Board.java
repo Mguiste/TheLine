@@ -43,7 +43,7 @@ public class Board {
     /**
      * Creates board based on a toString of a board
      *
-     * @param str
+     * @param str the toString version of a board
      */
     public Board(String str) {
         String[] lines = str.split("\n");
@@ -194,7 +194,7 @@ public class Board {
         }
     }
 
-    @Override
+    @Override // TODO: should toString of board print out column and row numbers
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("   ");

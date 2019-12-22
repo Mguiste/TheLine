@@ -40,5 +40,7 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="com.google.guava:guava:18.0" level="application" />
+    <orderEntry type="library" name="com.sparkjava:spark-core:2.9.1" level="project" />
+    <orderEntry type="library" name="com.google.code.gson:gson:2.8.6" level="project" />
   </component>
 </module>

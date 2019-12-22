@@ -1,4 +1,6 @@
-package main.java.com.TheLine;
+package main.java.com.TheLine.Runners;
+
+import main.java.com.TheLine.Board;
 
 import java.awt.*;
 import java.util.Scanner;
