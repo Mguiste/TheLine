@@ -194,7 +194,7 @@ public class Board {
         }
     }
 
-    @Override // TODO: should toString of board print out column and row numbers
+    @Override // TODO: should toString of board print out column and row numbers and length of square hardcoded
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("   ");
