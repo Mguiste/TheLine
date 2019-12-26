@@ -1,0 +1,4 @@
+target
+src/main/javascript/__clientTemp
+src/main/javascript/node_modules
+.idea
